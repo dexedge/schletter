@@ -1,0 +1,39 @@
+---
+title: "Burgtheater & Kärntnertortheater, 1781"
+author: "David Black and Dexter Edge"
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(DT)
+library(lubridate)
+
+calendar <- read.csv("Schletter.csv", header=FALSE, na.strings = c("", "NA"))
+
+colnames(calendar) <- c("Date", "Theater", "Title", "Type", "Author", "Composer")
+
+calendar <- drop_na(calendar, Date)
+calendar$Date <- mdy(calendar$Date)
+```
+
+```{r}
+DT::datatable(calendar, 
+              rownames = FALSE,
+              filter="top",
+              options = list(
+                autoWidth = TRUE,
+                pageLength = 25,
+                columnDefs = list(list(width = '80px',
+                                       targets  = c(0,3)),
+                                  list(width = '50px',
+                                       targets = c(1)),
+                                  list(width = '220px',
+                                       targets = c(2))))
+) %>% formatStyle(columns = c("Title"), 
+                  fontStyle = styleEqual('No title', 
+                                         'normal',
+                                         default = 'italic'))
+```
