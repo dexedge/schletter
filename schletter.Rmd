@@ -32,8 +32,14 @@ DT::datatable(calendar,
                                        targets = c(2)),
                                   list(width = '100px',
                                        targets = c(3))))
-) %>% formatStyle(columns = c("Title"), 
-                  fontStyle = styleEqual('No title', 
-                                         'normal',
-                                         default = 'italic'))
+              ) %>% 
+              formatStyle("Title", 
+                          fontStyle = styleEqual('No title',
+                                        'normal',
+                                         default = 'italic')
+              ) %>% 
+              formatStyle("Title", "Type",
+                          fontStyle = styleEqual(NA,
+                                         'normal'))
+  
 ```
