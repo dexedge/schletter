@@ -15,7 +15,9 @@ calendar <- read.csv("Schletter.csv", header=FALSE, na.strings = c("", "NA"))
 
 colnames(calendar) <- c("Date", "Theater", "Title", "Type", "Author", "Composer")
 
+# Drop rows with blank dates
 calendar <- drop_na(calendar, Date)
+# Change Filemaker date string to YYYY-MM-DD
 calendar$Date <- mdy(calendar$Date)
 ```
 
@@ -33,11 +35,14 @@ DT::datatable(calendar,
                                   list(width = '100px',
                                        targets = c(3))))
               ) %>% 
+              # Make titles italic except "No title"
               formatStyle("Title", 
                           fontStyle = styleEqual('No title',
                                         'normal',
                                          default = 'italic')
-              ) %>% 
+              ) %>%
+              # Concerts have NA for their work Type
+              # Make their titles normal type
               formatStyle("Title", "Type",
                           fontStyle = styleEqual(NA,
                                          'normal'))
