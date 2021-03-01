@@ -23,6 +23,7 @@ calendar$Date <- mdy(calendar$Date)
 
 ```{r}
 DT::datatable(calendar, 
+              # style = "bootstrap",
               rownames = FALSE,
               filter="top",
               options = list(
