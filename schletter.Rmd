@@ -19,22 +19,28 @@ colnames(calendar) <- c("Date", "Theater", "Title", "Type", "Author", "Composer"
 calendar <- drop_na(calendar, Date)
 # Change Filemaker date string to YYYY-MM-DD
 calendar$Date <- mdy(calendar$Date)
+calendar$Theater <- as_factor(calendar$Theater)
+calendar$Type <- as_factor(calendar$Type)
+
 ```
 
 ```{r}
 DT::datatable(calendar, 
               # style = "bootstrap",
               rownames = FALSE,
-              filter="top",
+              filter = 'top',
               options = list(
                 autoWidth = TRUE,
                 pageLength = 25,
-                columnDefs = list(list(width = '80px',
-                                       targets  = c(0,1)),
-                                  list(width = '300px',
+                columnDefs = list(
+                                  list(width = '10%',
+                                       targets  = c(0)),
+                                  list(width = '10%',
+                                       target = c(1)),
+                                  list(width = '35%',
                                        targets = c(2)),
-                                  list(width = '100px',
-                                       targets = c(3))))
+                                  list(width = '15%',
+                                       targets = c(3, 4, 5))))
               ) %>% 
               # Make titles italic except "No title"
               formatStyle("Title", 
