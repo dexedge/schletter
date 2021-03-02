@@ -19,6 +19,8 @@ colnames(calendar) <- c("Date", "Theater", "Title", "Type", "Author", "Composer"
 calendar <- drop_na(calendar, Date)
 # Change Filemaker date string to YYYY-MM-DD
 calendar$Date <- mdy(calendar$Date)
+# Make Theater and Type factors so DT will use dropdowns
+# in filters
 calendar$Theater <- as_factor(calendar$Theater)
 calendar$Type <- as_factor(calendar$Type)
 
