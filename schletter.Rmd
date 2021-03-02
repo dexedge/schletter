@@ -41,8 +41,8 @@ DT::datatable(calendar,
                                        target = c(1)),
                                   list(width = '320px',
                                        targets = c(2)),
-                                  list(width = '110px',
-                                       targets = c(3))))
+                                  list(width = '100px',
+                                       targets = c(3, 4, 5))))
               ) %>% 
               # Make titles italic except "No title"
               formatStyle("Title", 
