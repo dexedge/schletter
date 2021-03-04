@@ -13,15 +13,22 @@ library(lubridate)
 
 calendar <- read.csv("Schletter.csv", header=FALSE, na.strings = c("", "NA"))
 
-colnames(calendar) <- c("Date", "Theater", "Title", "Type", "Author", "Composer")
+colnames(calendar) <- c("YMD", "Theater", "Company", "Title", "Type", "Author", "Composer")
+
+# Change Filemaker date string to YYYY-MM-DD
+calendar$YMD <- mdy(calendar$YMD)
+
+# Add display date
+calendar <- calendar %>% 
+  mutate(Date = format(YMD, "%a, %d %b"), .before = 1)
 
 # Drop rows with blank dates
-calendar <- drop_na(calendar, Date)
-# Change Filemaker date string to YYYY-MM-DD
-calendar$Date <- mdy(calendar$Date)
+calendar <- drop_na(calendar, YMD)
+
 # Make Theater and Type factors so DT will use dropdowns
 # in filters
 calendar$Theater <- as_factor(calendar$Theater)
+calendar$Company <- as_factor(calendar$Company)
 calendar$Type <- as_factor(calendar$Type)
 
 ```
@@ -31,18 +38,25 @@ DT::datatable(calendar,
               # style = "bootstrap",
               rownames = FALSE,
               filter = 'top',
+              style = 'bootstrap4',
+              class = 'compact table-striped',
               options = list(
                 autoWidth = TRUE,
                 pageLength = 25,
                 columnDefs = list(
-                                  list(width = '105px',
-                                       targets  = c(0)),
-                                  list(width = '85px',
-                                       target = c(1)),
-                                  list(width = '320px',
-                                       targets = c(2)),
                                   list(width = '100px',
-                                       targets = c(3, 4, 5))))
+                                       targets  = 0, 
+                                       orderData = 1),
+                                  list(targets = 1,
+                                       visible = FALSE),
+                                  list(width = '80px',
+                                       target = 2),
+                                  list(width = '90px',
+                                       target = 3),
+                                  list(width = '320px',
+                                       targets = 4),
+                                  list(width = '100px',
+                                       targets = c(5, 6, 7))))
               ) %>% 
               # Make titles italic except "No title"
               formatStyle("Title", 
