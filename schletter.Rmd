@@ -43,8 +43,10 @@ DT::datatable(calendar,
                 columnDefs = list(
                                   list(width = '100px',
                                        targets  = 0, 
+                                       # Order Date by YMD field
                                        orderData = 1),
                                   list(targets = 1,
+                                       # Hide YMD field
                                        visible = FALSE),
                                   list(width = '80px',
                                        target = 2),
