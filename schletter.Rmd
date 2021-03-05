@@ -23,7 +23,7 @@ calendar %>%
   mutate(Date = format(YMD, "%a, %d %b"), .before = YMD) %>% 
   # Drop rows with blank dates
   drop_na(YMD) %>%
-  # Theater, Company, Type to factors
+  # Theater, Company, Type to factors fpr DT comments
   mutate(Theater = as_factor(Theater)) %>%
   mutate(Company = as_factor(Company)) %>% 
   mutate(Type= as_factor(Type)) -> calendar
