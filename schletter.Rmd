@@ -1,7 +1,7 @@
 ---
 title: "Burgtheater & Kärntnertortheater, 1781"
 author: "David Black and Dexter Edge"
-date: "`r format(Sys.time(), '%d %b %Y')`"
+date: "`r format(Sys.time(), '%e %b %Y')`"
 output: html_document
 ---
 
@@ -20,7 +20,7 @@ calendar %>%
   # Change Filemaker date string to YYYY-MM-DD
   mutate(YMD = mdy(YMD)) %>% 
   # Add display date
-  mutate(Date = format(YMD, "%a, %d %b"), .before = YMD) %>% 
+  mutate(Date = format(YMD, "%a, %e %b"), .before = YMD) %>% 
   # Drop rows with blank dates
   drop_na(YMD) %>%
   # Theater, Company, Type to factors for DT comments
