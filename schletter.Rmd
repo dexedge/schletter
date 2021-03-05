@@ -11,25 +11,22 @@ library(tidyverse)
 library(DT)
 library(lubridate)
 
-calendar <- read.csv("Schletter.csv", header=FALSE, na.strings = c("", "NA"))
-
-colnames(calendar) <- c("YMD", "Theater", "Company", "Title", "Type", "Author", "Composer")
-
-# Change Filemaker date string to YYYY-MM-DD
-calendar$YMD <- mdy(calendar$YMD)
-
-# Add display date
-calendar <- calendar %>% 
-  mutate(Date = format(YMD, "%a, %d %b"), .before = 1)
-
-# Drop rows with blank dates
-calendar <- drop_na(calendar, YMD)
-
-# Make Theater and Type factors so DT will use dropdowns
-# in filters
-calendar$Theater <- as_factor(calendar$Theater)
-calendar$Company <- as_factor(calendar$Company)
-calendar$Type <- as_factor(calendar$Type)
+calendar <- read_csv("Schletter.csv", col_names=FALSE,
+                     na = c("", "NA"))
+colnames(calendar) <- c("YMD", "Theater", "Company", "Title",
+                          "Type", "Author", "Composer")
+  
+calendar %>%
+  # Change Filemaker date string to YYYY-MM-DD
+  mutate(YMD = mdy(YMD)) %>% 
+  # Add display date
+  mutate(Date = format(YMD, "%a, %d %b"), .before = YMD) %>% 
+  # Drop rows with blank dates
+  drop_na(YMD) %>%
+  # Theater, Company, Type to factors
+  mutate(Theater = as_factor(Theater)) %>%
+  mutate(Company = as_factor(Company)) %>% 
+  mutate(Type= as_factor(Type)) -> calendar
 
 ```
 
