@@ -14,7 +14,7 @@ library(lubridate)
 calendar <- read_csv("Schletter.csv", col_names=FALSE,
                      na = c("", "NA"))
 colnames(calendar) <- c("YMD", "Theater", "Company", "Title",
-                          "Type", "Author", "Composer")
+                          "Genre", "Author", "Composer")
   
 calendar %>%
   # Change Filemaker date string to YYYY-MM-DD
@@ -26,7 +26,7 @@ calendar %>%
   # Theater, Company, Type to factors for DT drop-downs
   mutate(Theater = as_factor(Theater)) %>%
   mutate(Company = as_factor(Company)) %>% 
-  mutate(Type= as_factor(Type)) -> calendar
+  mutate(Type= as_factor(Genre)) -> calendar
 
 ```
 
