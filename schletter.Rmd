@@ -26,7 +26,7 @@ calendar %>%
   # Theater, Company, Genre to factors for DT drop-downs
   mutate(Theater = as_factor(Theater)) %>%
   mutate(Company = as_factor(Company)) %>% 
-  mutate(Genre= as_factor(Genre)) -> calendar
+  mutate(Genre = as_factor(Genre)) -> calendar
 
 ```
 
