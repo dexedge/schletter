@@ -23,10 +23,10 @@ calendar %>%
   mutate(Date = format(YMD, "%a, %e %b"), .before = YMD) %>% 
   # Drop rows with blank dates
   drop_na(YMD) %>%
-  # Theater, Company, Type to factors for DT drop-downs
+  # Theater, Company, Genre to factors for DT drop-downs
   mutate(Theater = as_factor(Theater)) %>%
   mutate(Company = as_factor(Company)) %>% 
-  mutate(Type= as_factor(Genre)) -> calendar
+  mutate(Genre= as_factor(Genre)) -> calendar
 
 ```
 
@@ -67,7 +67,7 @@ DT::datatable(calendar,
               ) %>%
               # Concerts have NA for their work Type
               # Make their titles normal type
-              formatStyle("Title", "Type",
+              formatStyle("Title", "Genre",
                           fontStyle = styleEqual(NA,
                                          'normal'))
   
