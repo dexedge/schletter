@@ -33,6 +33,7 @@ calendar %>%
 ```{r}
 DT::datatable(calendar, 
               # style = "bootstrap",
+              extensions = 'Buttons',
               rownames = FALSE,
               filter = 'top',
               style = 'bootstrap4',
@@ -40,6 +41,8 @@ DT::datatable(calendar,
               options = list(
                 autoWidth = TRUE,
                 pageLength = 25,
+                dom = 'Brtilp',
+                buttons = c('csv', 'print'),
                 columnDefs = list(
                                   list(width = '100px',
                                        className = 'dt-right',
