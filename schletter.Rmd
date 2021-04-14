@@ -1,5 +1,5 @@
 ---
-title: "Burgtheater & Kärntnertortheater, 1781"
+title: "Burgtheater & Kärntnertortheater, 1781-1782"
 author: "David Black and Dexter Edge"
 date: "`r format(Sys.time(), '%e %b %Y')`"
 output: html_document
@@ -20,7 +20,7 @@ calendar %>%
   # Change Filemaker date string to YYYY-MM-DD
   mutate(YMD = mdy(YMD)) %>% 
   # Add display date
-  mutate(Date = format(YMD, "%a, %e %b"), .before = YMD) %>% 
+  mutate(Date = format(YMD, "%a, %e %b %Y"), .before = YMD) %>% 
   # Drop rows with blank dates
   drop_na(YMD) %>%
   # Theater, Company, Genre to factors for DT drop-downs
@@ -44,7 +44,7 @@ DT::datatable(calendar,
                 dom = 'Brtilp',
                 buttons = c('csv', 'print'),
                 columnDefs = list(
-                                  list(width = '100px',
+                                  list(width = '135px',
                                        className = 'dt-right',
                                        targets  = 0, 
                                        # Order Date by YMD field
@@ -52,10 +52,10 @@ DT::datatable(calendar,
                                   list(targets = 1,
                                        # Hide YMD field
                                        visible = FALSE),
-                                  list(width = '70px',
+                                  list(width = '65px',
                                        className = 'dt-center',
                                        targets = 2),
-                                  list(width = '70px',
+                                  list(width = '65px',
                                        targets = 3),
                                   list(width = '320px',
                                        targets = 4),
