@@ -71,7 +71,7 @@ DT::datatable(calendar,
               # Concerts have NA for their work Type
               # Make their titles normal type
               formatStyle("Title", "Genre",
-                          fontStyle = styleEqual(NA,
+                          fontStyle = styleEqual('Concert',
                                          'normal'))
   
 ```
